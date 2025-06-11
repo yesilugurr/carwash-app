@@ -1,18 +1,23 @@
-// 💄 UI polish
-import React from 'react';
-import { StarIcon } from '@heroicons/react/20/solid';
-import { SparklesIcon } from '@heroicons/react/24/solid';
-import { motion } from 'framer-motion';
+// ✨ showtime: polished UI/animation overhaul
+import React from "react";
+import { StarIcon } from "@heroicons/react/20/solid";
+import { SparklesIcon } from "@heroicons/react/24/solid";
+import { motion } from "framer-motion";
+import Tilt from "react-parallax-tilt";
 
 const ServiceCard = ({ service, onSelect }) => {
   const rating = Math.round(service.ratings || 0);
   return (
-    <motion.div
-      whileHover={{ y: -4 }}
-      className="group relative rounded-xl"
-    >
+    <motion.div whileHover={{ y: -4 }} className="group relative rounded-xl">
       <div className="p-px rounded-xl transition-all group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary">
-        <div className="bg-white rounded-[inherit] p-4 shadow">
+        <Tilt
+          tiltEnable={
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          }
+          tiltMaxAngleX={5}
+          tiltMaxAngleY={5}
+          className="bg-white rounded-[inherit] p-4 shadow"
+        >
           {service.avatar && (
             <img
               src={service.avatar}
@@ -26,7 +31,7 @@ const ServiceCard = ({ service, onSelect }) => {
               {[...Array(5)].map((_, i) => (
                 <StarIcon
                   key={i}
-                  className={`h-5 w-5 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                  className={`h-5 w-5 ${i < rating ? "text-yellow-400" : "text-gray-300"}`}
                 />
               ))}
               <motion.span
@@ -42,12 +47,13 @@ const ServiceCard = ({ service, onSelect }) => {
             </span>
           </div>
           <button
-            className="mt-4 w-full rounded bg-primary py-2 text-white hover:bg-primary/90"
+            className="mt-4 w-full rounded bg-primary py-2 text-white hover:bg-primary/90 relative overflow-hidden"
             onClick={() => onSelect?.(service)}
           >
-            Book Now
+            <span className="ripple absolute inset-0"></span>
+            <span className="relative">Book Now</span>
           </button>
-        </div>
+        </Tilt>
       </div>
     </motion.div>
   );

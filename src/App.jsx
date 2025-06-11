@@ -1,12 +1,12 @@
-// 💄 UI polish
-import React, { lazy, Suspense } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import './App.css';
+// ✨ showtime: polished UI/animation overhaul
+import React, { lazy, Suspense } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import "./App.css";
 
-const LandingPage = lazy(() => import('./pages/LandingPage'));
-const CustomerLayout = lazy(() => import('./layouts/CustomerLayout'));
-const ProviderLayout = lazy(() => import('./layouts/ProviderLayout'));
+const LandingPage = lazy(() => import("./pages/LandingPage"));
+const CustomerLayout = lazy(() => import("./layouts/CustomerLayout"));
+const ProviderLayout = lazy(() => import("./layouts/ProviderLayout"));
 
 function App() {
   const location = useLocation();

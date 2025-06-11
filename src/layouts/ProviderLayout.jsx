@@ -1,21 +1,21 @@
-// 💄 UI polish
-import React, { lazy, Suspense, Fragment, useState } from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Dialog, Transition } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import TopBar from '../components/TopBar';
+// ✨ showtime: polished UI/animation overhaul
+import React, { lazy, Suspense, Fragment, useState } from "react";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { Dialog, Transition } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import TopBar from "../components/TopBar";
 
-const Overview = lazy(() => import('../pages/provider/Overview'));
-const Schedule = lazy(() => import('../pages/provider/Schedule'));
-const Services = lazy(() => import('../pages/provider/Services'));
-const Products = lazy(() => import('../pages/provider/Products'));
+const Overview = lazy(() => import("../pages/provider/Overview"));
+const Schedule = lazy(() => import("../pages/provider/Schedule"));
+const Services = lazy(() => import("../pages/provider/Services"));
+const Products = lazy(() => import("../pages/provider/Products"));
 
 const navLinks = [
-  { to: '', label: 'Overview' },
-  { to: 'schedule', label: 'Schedule' },
-  { to: 'services', label: 'Services' },
-  { to: 'products', label: 'Products' },
+  { to: "", label: "Overview" },
+  { to: "schedule", label: "Schedule" },
+  { to: "services", label: "Services" },
+  { to: "products", label: "Products" },
 ];
 
 const ProviderLayout = () => {
@@ -31,20 +31,28 @@ const ProviderLayout = () => {
               key={l.to}
               to={l.to}
               className={`px-3 py-1 rounded hover:underline ${
-                location.pathname === (l.to ? `/provider/${l.to}` : '/provider')
-                  ? 'bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-gradient'
-                  : ''
+                location.pathname === (l.to ? `/provider/${l.to}` : "/provider")
+                  ? "bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-gradient"
+                  : ""
               }`}
             >
               {l.label}
             </Link>
           ))}
         </nav>
-        <button className="md:hidden p-2" onClick={() => setOpen(true)} aria-label="Open menu">
+        <button
+          className="md:hidden p-2"
+          onClick={() => setOpen(true)}
+          aria-label="Open menu"
+        >
           <Bars3Icon className="w-6 h-6" />
         </button>
         <Transition appear show={open} as={Fragment}>
-          <Dialog as="div" className="relative z-10 md:hidden" onClose={setOpen}>
+          <Dialog
+            as="div"
+            className="relative z-10 md:hidden"
+            onClose={setOpen}
+          >
             <div className="fixed inset-0 bg-black/50" />
             <div className="fixed inset-0 flex items-start justify-end p-4">
               <Dialog.Panel className="bg-white/10 backdrop-blur shadow-inner rounded w-40 p-2 space-y-2">
@@ -57,9 +65,10 @@ const ProviderLayout = () => {
                     to={l.to}
                     onClick={() => setOpen(false)}
                     className={`block px-3 py-1 rounded ${
-                      location.pathname === (l.to ? `/provider/${l.to}` : '/provider')
-                        ? 'bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-gradient'
-                        : 'hover:bg-white/20'
+                      location.pathname ===
+                      (l.to ? `/provider/${l.to}` : "/provider")
+                        ? "bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-gradient"
+                        : "hover:bg-white/20"
                     }`}
                   >
                     {l.label}

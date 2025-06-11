@@ -1,19 +1,19 @@
-// 💄 UI polish
-import React, { lazy, Suspense, Fragment, useState } from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Dialog, Transition } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import TopBar from '../components/TopBar';
+// ✨ showtime: polished UI/animation overhaul
+import React, { lazy, Suspense, Fragment, useState } from "react";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { Dialog, Transition } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import TopBar from "../components/TopBar";
 
-const Dashboard = lazy(() => import('../pages/customer/Dashboard'));
-const ServiceList = lazy(() => import('../pages/customer/ServiceList'));
-const Appointments = lazy(() => import('../pages/customer/Appointments'));
+const Dashboard = lazy(() => import("../pages/customer/Dashboard"));
+const ServiceList = lazy(() => import("../pages/customer/ServiceList"));
+const Appointments = lazy(() => import("../pages/customer/Appointments"));
 
 const navLinks = [
-  { to: '', label: 'Dashboard' },
-  { to: 'services', label: 'Services' },
-  { to: 'appointments', label: 'Appointments' },
+  { to: "", label: "Dashboard" },
+  { to: "services", label: "Services" },
+  { to: "appointments", label: "Appointments" },
 ];
 
 const CustomerLayout = () => {
@@ -30,9 +30,9 @@ const CustomerLayout = () => {
               key={l.to}
               to={l.to}
               className={`px-3 py-1 rounded hover:underline ${
-                location.pathname === (l.to ? `/customer/${l.to}` : '/customer')
-                  ? 'bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-gradient'
-                  : ''
+                location.pathname === (l.to ? `/customer/${l.to}` : "/customer")
+                  ? "bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-gradient"
+                  : ""
               }`}
             >
               {l.label}
@@ -47,7 +47,11 @@ const CustomerLayout = () => {
           <Bars3Icon className="w-6 h-6" />
         </button>
         <Transition appear show={open} as={Fragment}>
-          <Dialog as="div" className="relative z-10 md:hidden" onClose={setOpen}>
+          <Dialog
+            as="div"
+            className="relative z-10 md:hidden"
+            onClose={setOpen}
+          >
             <div className="fixed inset-0 bg-black/50" />
             <div className="fixed inset-0 flex items-start justify-end p-4">
               <Dialog.Panel className="bg-white/10 backdrop-blur shadow-inner rounded w-40 p-2 space-y-2">
@@ -60,9 +64,10 @@ const CustomerLayout = () => {
                     to={l.to}
                     onClick={() => setOpen(false)}
                     className={`block px-3 py-1 rounded ${
-                      location.pathname === (l.to ? `/customer/${l.to}` : '/customer')
-                        ? 'bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-gradient'
-                        : 'hover:bg-white/20'
+                      location.pathname ===
+                      (l.to ? `/customer/${l.to}` : "/customer")
+                        ? "bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-gradient"
+                        : "hover:bg-white/20"
                     }`}
                   >
                     {l.label}
