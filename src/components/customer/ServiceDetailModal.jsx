@@ -6,6 +6,14 @@ import { motion } from 'framer-motion';
 import Button from '../ui/Button';
 
 const ServiceDetailModal = ({ service, open, onClose, onBook }) => {
+  if (!open || !service) return null;
+  const {
+    name,
+    description,
+    specialties = [],
+    gallery = [],
+    reviews = [],
+  } = service;
   return (
     <Transition appear show={open} as={Fragment}>
       <Dialog as="div" className="relative z-20" onClose={onClose}>
@@ -19,7 +27,7 @@ const ServiceDetailModal = ({ service, open, onClose, onBook }) => {
               className="bg-white dark:bg-slate-800 rounded-xl p-4 space-y-4"
             >
               <Dialog.Title className="text-lg font-semibold text-center">
-                {service.name}
+                {name}
               </Dialog.Title>
               <Tab.Group>
                 <Tab.List className="flex gap-2 mb-2">
@@ -36,9 +44,9 @@ const ServiceDetailModal = ({ service, open, onClose, onBook }) => {
                 </Tab.List>
                 <Tab.Panels>
                   <Tab.Panel className="space-y-2 text-sm">
-                    <p>{service.description || 'No description.'}</p>
+                    <p>{description || 'No description.'}</p>
                     <div className="flex flex-wrap gap-1">
-                      {(service.specialties || []).map((p) => (
+                      {specialties.map((p) => (
                         <span key={p} className="px-2 py-1 bg-secondary text-black rounded-full text-xs">
                           {p}
                         </span>
@@ -47,13 +55,13 @@ const ServiceDetailModal = ({ service, open, onClose, onBook }) => {
                   </Tab.Panel>
                   <Tab.Panel>
                     <div className="flex overflow-x-auto gap-2">
-                      {(service.gallery || []).slice(0,3).map((img, i) => (
+                      {gallery.slice(0, 3).map((img, i) => (
                         <img key={i} src={img} loading="lazy" alt="gallery" className="w-40 h-24 rounded object-cover" />
                       ))}
                     </div>
                   </Tab.Panel>
                   <Tab.Panel className="space-y-2 text-sm">
-                    {(service.reviews || ['Great service!', 'Loved it', 'Amazing']).map((r, i) => (
+                    {(reviews.length ? reviews : ['Great service!', 'Loved it', 'Amazing']).map((r, i) => (
                       <p key={i}>&ldquo;{r}&rdquo;</p>
                     ))}
                   </Tab.Panel>
