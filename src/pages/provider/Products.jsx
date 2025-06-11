@@ -1,3 +1,4 @@
+// 💄 UI polish
 import React, { useState } from 'react';
 import useDummy from '../../store/useDummy';
 import Card from '../../components/Card';
@@ -97,7 +98,7 @@ const Products = () => {
       <button className="px-3 py-1 rounded bg-primary text-white" onClick={() => setAdding(true)}>
         Add Product
       </button>
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {products.map((p) => (
           <ProductCard key={p.id} product={p} />
         ))}

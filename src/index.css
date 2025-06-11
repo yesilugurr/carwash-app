@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 💄 UI polish */
+body {
+  @apply bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 text-white selection:bg-secondary/60 selection:text-white;
+}
+
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s linear infinite;
+}

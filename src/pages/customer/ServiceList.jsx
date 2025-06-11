@@ -1,3 +1,4 @@
+// 💄 UI polish
 import React, { useState } from 'react';
 import useDummy from '../../store/useDummy';
 import ServiceCard from '../../components/ServiceCard';
@@ -9,7 +10,7 @@ const ServiceList = () => {
 
   return (
     <div>
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {services.map((service) => (
           <ServiceCard key={service.id} service={service} onSelect={() => setSelected(service)} />
         ))}

@@ -1,5 +1,7 @@
+// 💄 UI polish
 import React from 'react';
 import dayjs from 'dayjs';
+import { motion } from 'framer-motion';
 import useDummy from '../../store/useDummy';
 import Card from '../../components/Card';
 
@@ -13,20 +15,25 @@ const Overview = () => {
   const lowStock = products.filter((p) => p.qty < 5).length;
 
   return (
-    <div className="grid md:grid-cols-3 gap-4">
-      <Card>
-        <h3 className="text-lg font-semibold">Total Bookings</h3>
-        <p className="text-2xl">{total}</p>
-      </Card>
-      <Card>
-        <h3 className="text-lg font-semibold">Today's Bookings</h3>
-        <p className="text-2xl">{todayCount}</p>
-      </Card>
-      <Card>
-        <h3 className="text-lg font-semibold">Low Stock Products</h3>
-        <p className="text-2xl">{lowStock}</p>
-      </Card>
-    </div>
+    <motion.div
+      className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
+      initial="hidden"
+      animate="show"
+      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
+    >
+      {[{ label: 'Total Bookings', value: total }, { label: "Today's Bookings", value: todayCount }, { label: 'Low Stock Products', value: lowStock }].map((item) => (
+        <motion.div
+          key={item.label}
+          variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
+          className="drop-shadow-glow"
+        >
+          <Card>
+            <h3 className="text-lg font-semibold">{item.label}</h3>
+            <p className="text-2xl">{item.value}</p>
+          </Card>
+        </motion.div>
+      ))}
+    </motion.div>
   );
 };
 
