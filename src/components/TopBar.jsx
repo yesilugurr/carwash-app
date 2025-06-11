@@ -1,6 +1,7 @@
 // ✨ showtime: polished UI/animation overhaul
 import React, { useState, Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
+import { Link, useLocation } from "react-router-dom";
 import {
   UserCircleIcon,
   SparklesIcon,
@@ -9,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 const TopBar = () => {
+  const location = useLocation();
   const [dark, setDark] = useState(
     document.documentElement.classList.contains("dark"),
   );
@@ -30,6 +32,22 @@ const TopBar = () => {
             <MoonIcon className="w-6 h-6 text-gray-400" />
           )}
         </button>
+        {location.pathname === "/" ? (
+          <>
+            <Link
+              to="/login"
+              className="px-3 py-1 rounded bg-primary text-white"
+            >
+              Log In
+            </Link>
+            <Link
+              to="/register"
+              className="px-3 py-1 rounded bg-secondary text-black"
+            >
+              Sign Up
+            </Link>
+          </>
+        ) : (
         <Menu as="div" className="relative inline-block text-left">
           <Menu.Button className="flex items-center focus:outline-none">
             <UserCircleIcon className="w-8 h-8 text-gray-600" />
@@ -71,6 +89,7 @@ const TopBar = () => {
             </Menu.Items>
           </Transition>
         </Menu>
+        )}
       </div>
     </header>
   );

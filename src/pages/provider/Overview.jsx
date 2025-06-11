@@ -49,8 +49,9 @@ const Overview = () => {
 };
 
 const Counter = ({ end }) => {
-  const { value } = useCountUp({ isCounting: true, end, duration: 1 });
-  return <p className="text-2xl">{Math.round(value)}</p>;
+  const safeEnd = typeof end === "number" ? end : 0;
+  const { value } = useCountUp({ isCounting: true, end: safeEnd, duration: 1 });
+  return <p className="text-2xl">{Number(value || 0).toFixed(0)}</p>;
 };
 
 export default Overview;
