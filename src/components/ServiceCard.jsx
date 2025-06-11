@@ -1,21 +1,47 @@
 import React from 'react';
+import { StarIcon } from '@heroicons/react/20/solid';
+import { motion } from 'framer-motion';
 
-const ServiceCard = ({ service, onClick }) => (
-  <div
-    className="rounded shadow hover:shadow-lg p-4 cursor-pointer bg-white"
-    onClick={() => onClick && onClick(service)}
-  >
-    {service.avatar && (
-      <img
-        src={service.avatar}
-        alt={service.name}
-        className="w-full h-32 object-cover rounded mb-2"
-      />
-    )}
-    <h3 className="font-semibold text-lg">{service.name}</h3>
-    <p className="text-sm text-gray-500">{service.location}</p>
-    <p className="text-sm">Rating: {service.ratings}</p>
-  </div>
-);
+const ServiceCard = ({ service, onSelect }) => {
+  const rating = Math.round(service.ratings || 0);
+  return (
+    <motion.div
+      whileHover={{ y: -4 }}
+      className="group relative rounded-xl"
+    >
+      <div className="p-px rounded-xl transition-all group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary">
+        <div className="bg-white rounded-[inherit] p-4 shadow">
+          {service.avatar && (
+            <img
+              src={service.avatar}
+              alt={service.name}
+              className="w-20 h-20 mx-auto mb-3 rounded-full object-cover ring-2 ring-primary"
+            />
+          )}
+          <h3 className="text-center text-lg font-semibold">{service.name}</h3>
+          <div className="mt-2 flex items-center justify-between">
+            <div className="flex">
+              {[...Array(5)].map((_, i) => (
+                <StarIcon
+                  key={i}
+                  className={`h-5 w-5 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                />
+              ))}
+            </div>
+            <span className="px-2 py-0.5 text-xs rounded bg-gray-100 text-gray-600">
+              {service.location}
+            </span>
+          </div>
+          <button
+            className="mt-4 w-full rounded bg-primary py-2 text-white hover:bg-primary/90"
+            onClick={() => onSelect?.(service)}
+          >
+            Book Now
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 export default ServiceCard;
