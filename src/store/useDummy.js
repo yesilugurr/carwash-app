@@ -1,38 +1,14 @@
 import { create } from 'zustand';
+import {
+  services as sampleServices,
+  products as sampleProducts,
+  appointments as sampleAppointments,
+} from './dummyData';
 
 const useDummy = create((set, get) => ({
-  services: [
-    {
-      id: 1,
-      name: 'Quick Clean',
-      avatar: '/avatars/service1.png',
-      location: '123 Main St',
-      ratings: 4.5,
-      specialties: ['Exterior Wash', 'Interior Cleaning'],
-      availableSlots: [
-        { date: '2025-06-15', times: ['09:00', '11:00'] },
-        { date: '2025-06-16', times: ['10:00', '14:00'] }
-      ]
-    },
-    {
-      id: 2,
-      name: 'Deluxe Detail',
-      avatar: '/avatars/service2.png',
-      location: '456 Pine Rd',
-      ratings: 4.8,
-      specialties: ['Exterior Wash', 'Waxing'],
-      availableSlots: [
-        { date: '2025-06-15', times: ['13:00', '15:00'] }
-      ]
-    }
-  ],
-  products: [
-    { id: 1, name: 'Car Shampoo', code: 'CS001', qty: 10, category: 'Cleaning' },
-    { id: 2, name: 'Microfiber Cloth', code: 'MC002', qty: 25, category: 'Accessories' }
-  ],
-  appointments: [
-    { id: 1, serviceId: 1, customerName: 'John Doe', date: '2025-06-15', time: '09:00', package: 'Basic Wash' }
-  ],
+  services: sampleServices,
+  products: sampleProducts,
+  appointments: sampleAppointments,
   packages: {
     Exterior: true,
     Interior: false,
