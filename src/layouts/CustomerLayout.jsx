@@ -6,12 +6,13 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import TopBar from "../components/TopBar";
 
-const Dashboard = lazy(() => import("../pages/customer/Dashboard"));
-const ServiceList = lazy(() => import("../pages/customer/ServiceList"));
+const Landing = lazy(() => import("../pages/customer/Landing"));
+const Services = lazy(() => import("../pages/customer/Services"));
+const Booking = lazy(() => import("../pages/customer/Booking"));
 const Appointments = lazy(() => import("../pages/customer/Appointments"));
 
 const navLinks = [
-  { to: "", label: "Dashboard" },
+  { to: "", label: "Home" },
   { to: "services", label: "Services" },
   { to: "appointments", label: "Appointments" },
 ];
@@ -88,8 +89,9 @@ const CustomerLayout = () => {
               exit={{ opacity: 0, y: -10, transition: { duration: 0.4 } }}
             >
               <Routes location={location}>
-                <Route index element={<Dashboard />} />
-                <Route path="services" element={<ServiceList />} />
+                <Route index element={<Landing />} />
+                <Route path="services" element={<Services />} />
+                <Route path="booking/:id" element={<Booking />} />
                 <Route path="appointments" element={<Appointments />} />
               </Routes>
             </motion.div>

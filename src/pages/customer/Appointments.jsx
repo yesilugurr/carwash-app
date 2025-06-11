@@ -1,8 +1,8 @@
-// ✨ customer-refactor
 import React, { useState } from 'react';
 import useDummy from '../../store/useDummy';
 import RescheduleModal from '../../components/RescheduleModal';
 import CancelModal from '../../components/CancelModal';
+import Button from '../../components/ui/Button';
 
 const Appointments = () => {
   const services = useDummy((s) => s.services);
@@ -22,18 +22,18 @@ const Appointments = () => {
   return (
     <div>
       <div className="mb-4 space-x-2">
-        <button
-          className={`px-3 py-1 rounded ${tab === 'upcoming' ? 'bg-primary text-white' : 'bg-gray-200'}`}
+        <Button
+          className={tab === 'upcoming' ? '' : 'bg-gray-200 text-black'}
           onClick={() => setTab('upcoming')}
         >
           Upcoming
-        </button>
-        <button
-          className={`px-3 py-1 rounded ${tab === 'past' ? 'bg-primary text-white' : 'bg-gray-200'}`}
+        </Button>
+        <Button
+          className={tab === 'past' ? '' : 'bg-gray-200 text-black'}
           onClick={() => setTab('past')}
         >
           Past
-        </button>
+        </Button>
       </div>
       <div className="space-y-2">
         {list.map((a) => {
@@ -46,18 +46,18 @@ const Appointments = () => {
               </div>
               {tab === 'upcoming' && (
                 <div className="space-x-2 mt-2">
-                  <button
-                    className="px-2 py-1 text-sm rounded bg-gray-200"
+                  <Button
+                    className="bg-gray-200 text-black"
                     onClick={() => setRescheduleFor({ appt: a, service })}
                   >
                     Reschedule
-                  </button>
-                  <button
-                    className="px-2 py-1 text-sm rounded bg-red-500 text-white"
+                  </Button>
+                  <Button
+                    className="bg-red-500"
                     onClick={() => setCancelFor(a.id)}
                   >
                     Cancel
-                  </button>
+                  </Button>
                 </div>
               )}
             </div>

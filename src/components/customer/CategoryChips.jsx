@@ -1,13 +1,11 @@
-// ✨ customer-refactor
 import React from 'react';
-import { SparklesIcon, WrenchScrewdriverIcon, PaintBrushIcon, ShieldCheckIcon } from '@heroicons/react/24/solid';
+import { SparklesIcon, WrenchScrewdriverIcon, PaintBrushIcon } from '@heroicons/react/24/solid';
 import useDummy from '../../store/useDummy';
 
-export const CATEGORIES = [
-  { id: 'Exterior Wash', label: 'Exterior Wash', icon: SparklesIcon },
-  { id: 'Interior Wash', label: 'Interior Wash', icon: WrenchScrewdriverIcon },
+const CATEGORIES = [
+  { id: 'Exterior Wash', label: 'Exterior', icon: SparklesIcon },
+  { id: 'Interior Wash', label: 'Interior', icon: WrenchScrewdriverIcon },
   { id: 'Detailing', label: 'Detailing', icon: PaintBrushIcon },
-  { id: 'Paint Protection', label: 'Paint Protection', icon: ShieldCheckIcon },
 ];
 
 const CategoryChips = () => {
