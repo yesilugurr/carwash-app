@@ -11,7 +11,7 @@ const ServiceList = () => {
     <div>
       <div className="grid md:grid-cols-3 gap-4">
         {services.map((service) => (
-          <ServiceCard key={service.id} service={service} onClick={() => setSelected(service)} />
+          <ServiceCard key={service.id} service={service} onSelect={() => setSelected(service)} />
         ))}
       </div>
       {selected && (
