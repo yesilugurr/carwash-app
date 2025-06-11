@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import useDummy from "../../store/useDummy";
 import Card from "../../components/Card";
 import { useCountUp } from "react-use-count-up";
+import PropTypes from "prop-types";
 
 const Overview = () => {
   const appointments = useDummy((s) => s.appointments);
@@ -40,7 +41,7 @@ const Overview = () => {
         >
           <Card>
             <h3 className="text-lg font-semibold">{item.label}</h3>
-            <SafeCounter end={item.value} />
+            <Counter value={item.value} />
           </Card>
         </motion.div>
       ))}
@@ -48,24 +49,16 @@ const Overview = () => {
   );
 };
 
-const Counter = ({ end }) => {
-  let safeValue = 0; // ✅ fix: guard undefined values
-  try {
-    safeValue = typeof end === "number" ? end : 0;
-  } catch {
-    safeValue = 0;
-  }
-  const { value } = useCountUp({ isCounting: true, end: safeValue, duration: 1 });
-  const num = typeof value === "number" ? value : parseFloat(value);
-  return <p className="text-2xl">{!Number.isNaN(num) ? num.toFixed(0) : 0}</p>;
+const Counter = ({ value }) => {
+  const endVal = Number(value ?? 0);
+  const { value: animated } = useCountUp({ isCounting: true, end: endVal, duration: 1 });
+  const num = Number(animated);
+  const display = !Number.isNaN(num) ? num.toFixed(1) : 0;
+  return <p className="text-2xl">{display}</p>;
 };
 
-const SafeCounter = ({ end }) => {
-  try {
-    return <Counter end={end} />;
-  } catch {
-    return <p className="text-2xl">0</p>;
-  }
+Counter.propTypes = {
+  value: PropTypes.number,
 };
 
 export default Overview;

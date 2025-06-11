@@ -11,7 +11,12 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, info) {
-    console.error(error, info); // ✅ fix: log error
+    if (process.env.NODE_ENV === 'production') {
+      // Placeholder for reporting to Sentry or other service
+      console.log('Reporting error to monitoring service', error, info);
+    } else {
+      console.error(error, info);
+    }
     if (typeof window !== 'undefined') {
       alert('An unexpected error occurred.');
     }
