@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import useDummy from '../../store/useDummy';
 import ServiceCard from '../../components/ServiceCard';
 
@@ -17,7 +18,14 @@ const Dashboard = () => {
   return (
     <div>
       <div className="bg-primary text-white p-6 rounded mb-4 space-y-2">
-        <h1 className="text-2xl font-bold">Find the perfect wash</h1>
+        <motion.h1
+          className="text-2xl font-bold"
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          Find the perfect wash
+        </motion.h1>
         <input
           type="text"
           placeholder="Search by specialty"
@@ -26,12 +34,25 @@ const Dashboard = () => {
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
-      <div className="grid md:grid-cols-3 gap-4">
+      <motion.div
+        className="grid md:grid-cols-3 gap-4"
+        variants={{
+          hidden: {},
+          show: { transition: { staggerChildren: 0.15 } }
+        }}
+        initial="hidden"
+        animate="show"
+      >
         {top.map((service) => (
-          <ServiceCard key={service.id} service={service} />
+          <motion.div
+            key={service.id}
+            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
+          >
+            <ServiceCard service={service} />
+          </motion.div>
         ))}
         {!top.length && <p>No services found.</p>}
-      </div>
+      </motion.div>
     </div>
   );
 };
