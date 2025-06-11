@@ -1,6 +1,6 @@
-// 💄 UI polish
-import React from 'react';
-import { motion } from 'framer-motion';
+// ✨ showtime: polished UI/animation overhaul
+import React from "react";
+import { motion } from "framer-motion";
 
 const Card = ({ children }) => {
   return (

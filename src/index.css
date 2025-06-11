@@ -1,18 +1,91 @@
+/* ✨ showtime: polished UI/animation overhaul */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 💄 UI polish */
+:root {
+  --color-primary: theme("colors.primary");
+  --color-secondary: theme("colors.secondary");
+  --color-accent: theme("colors.accent");
+  --color-surface: theme("colors.surface");
+  --color-base: white;
+}
+:root.dark {
+  --color-base: theme("colors.baseDark");
+}
+
 body {
-  @apply bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 text-white selection:bg-secondary/60 selection:text-white;
+  @apply min-h-screen font-body text-base text-gray-800 bg-[length:100%_100%];
+  background:
+    linear-gradient(120deg, var(--color-primary), var(--color-secondary)),
+    var(--color-base);
+  background-attachment: fixed;
+  transition: background-color 250ms;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("./noise.svg");
+  opacity: 0.25;
+  pointer-events: none;
+  mix-blend-mode: overlay;
 }
 
-@keyframes gradient {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+@keyframes sweep {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
-
 .animate-gradient {
   background-size: 200% 200%;
-  animation: gradient 3s linear infinite;
+  animation: sweep 4s linear infinite;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ripple {
+  overflow: hidden;
+  position: absolute;
+  border-radius: inherit;
+}
+.ripple::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0.2;
+  transform: scale(0);
+  border-radius: inherit;
+  animation: ripple 600ms ease-out;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
 }

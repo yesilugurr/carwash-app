@@ -1,21 +1,26 @@
-// 💄 UI polish
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Combobox } from '@headlessui/react';
-import useDummy from '../../store/useDummy';
-import ServiceCard from '../../components/ServiceCard';
+// ✨ showtime: polished UI/animation overhaul
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Combobox } from "@headlessui/react";
+import useDummy from "../../store/useDummy";
+import ServiceCard from "../../components/ServiceCard";
+import Masonry from "react-masonry-css";
 
 const Dashboard = () => {
   const services = useDummy((s) => s.services);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(t);
+  }, []);
 
   const filtered = services.filter((s) =>
-    s.specialties.join(' ').toLowerCase().includes(query.toLowerCase())
+    s.specialties.join(" ").toLowerCase().includes(query.toLowerCase()),
   );
 
-  const top = [...filtered]
-    .sort((a, b) => b.ratings - a.ratings)
-    .slice(0, 3);
+  const top = [...filtered].sort((a, b) => b.ratings - a.ratings).slice(0, 3);
 
   return (
     <div>
@@ -37,22 +42,35 @@ const Dashboard = () => {
         </Combobox>
       </div>
       <motion.div
-        className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
+        className=""
         variants={{
           hidden: {},
-          show: { transition: { staggerChildren: 0.15 } }
+          show: { transition: { staggerChildren: 0.15 } },
         }}
         initial="hidden"
         animate="show"
       >
-        {top.map((service) => (
-          <motion.div
-            key={service.id}
-            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
-          >
-            <ServiceCard service={service} />
-          </motion.div>
-        ))}
+        <Masonry
+          breakpointCols={{ default: 3, 1100: 2, 700: 1 }}
+          className="flex w-auto gap-4"
+          columnClassName="my-masonry-grid_column"
+        >
+          {top.map((service) => (
+            <motion.div
+              key={service.id}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0 },
+              }}
+            >
+              {loading ? (
+                <div className="h-40 bg-gray-200 rounded animate-pulse" />
+              ) : (
+                <ServiceCard service={service} />
+              )}
+            </motion.div>
+          ))}
+        </Masonry>
         {!top.length && <p>No services found.</p>}
       </motion.div>
     </div>
