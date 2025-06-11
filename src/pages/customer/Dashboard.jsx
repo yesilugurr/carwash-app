@@ -1,5 +1,7 @@
+// 💄 UI polish
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Combobox } from '@headlessui/react';
 import useDummy from '../../store/useDummy';
 import ServiceCard from '../../components/ServiceCard';
 
@@ -17,25 +19,25 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div className="bg-primary text-white p-6 rounded mb-4 space-y-2">
+      <div className="bg-white/10 backdrop-blur p-6 rounded mb-4 space-y-2 animate-pulse">
         <motion.h1
-          className="text-2xl font-bold"
+          className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
           Find the perfect wash
         </motion.h1>
-        <input
-          type="text"
-          placeholder="Search by specialty"
-          className="w-full p-2 rounded text-black"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
+        <Combobox value={query} onChange={setQuery}>
+          <Combobox.Input
+            className="w-full p-2 rounded text-black"
+            placeholder="Search by specialty"
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </Combobox>
       </div>
       <motion.div
-        className="grid md:grid-cols-3 gap-4"
+        className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
         variants={{
           hidden: {},
           show: { transition: { staggerChildren: 0.15 } }

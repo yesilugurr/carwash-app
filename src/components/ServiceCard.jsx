@@ -1,5 +1,7 @@
+// 💄 UI polish
 import React from 'react';
 import { StarIcon } from '@heroicons/react/20/solid';
+import { SparklesIcon } from '@heroicons/react/24/solid';
 import { motion } from 'framer-motion';
 
 const ServiceCard = ({ service, onSelect }) => {
@@ -20,13 +22,20 @@ const ServiceCard = ({ service, onSelect }) => {
           )}
           <h3 className="text-center text-lg font-semibold">{service.name}</h3>
           <div className="mt-2 flex items-center justify-between">
-            <div className="flex">
+            <div className="flex relative">
               {[...Array(5)].map((_, i) => (
                 <StarIcon
                   key={i}
                   className={`h-5 w-5 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
                 />
               ))}
+              <motion.span
+                className="absolute -top-1 -right-3 text-yellow-400"
+                animate={{ scale: [1, 1.4, 1], opacity: [1, 0, 1] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+              >
+                <SparklesIcon className="w-4 h-4" />
+              </motion.span>
             </div>
             <span className="px-2 py-0.5 text-xs rounded bg-gray-100 text-gray-600">
               {service.location}
