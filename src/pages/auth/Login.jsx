@@ -6,7 +6,6 @@ const Login = () => {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("login", form);
   };
   return (
     <div className="min-h-screen grid md:grid-cols-2">

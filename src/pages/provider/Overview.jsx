@@ -40,7 +40,7 @@ const Overview = () => {
         >
           <Card>
             <h3 className="text-lg font-semibold">{item.label}</h3>
-            <Counter end={item.value} />
+            <SafeCounter end={item.value} />
           </Card>
         </motion.div>
       ))}
@@ -49,9 +49,23 @@ const Overview = () => {
 };
 
 const Counter = ({ end }) => {
-  const safeEnd = typeof end === "number" ? end : 0;
-  const { value } = useCountUp({ isCounting: true, end: safeEnd, duration: 1 });
-  return <p className="text-2xl">{Number(value || 0).toFixed(0)}</p>;
+  let safeValue = 0; // ✅ fix: guard undefined values
+  try {
+    safeValue = typeof end === "number" ? end : 0;
+  } catch {
+    safeValue = 0;
+  }
+  const { value } = useCountUp({ isCounting: true, end: safeValue, duration: 1 });
+  const num = typeof value === "number" ? value : parseFloat(value);
+  return <p className="text-2xl">{!Number.isNaN(num) ? num.toFixed(0) : 0}</p>;
+};
+
+const SafeCounter = ({ end }) => {
+  try {
+    return <Counter end={end} />;
+  } catch {
+    return <p className="text-2xl">0</p>;
+  }
 };
 
 export default Overview;

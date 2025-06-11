@@ -7,7 +7,6 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (form.password !== form.confirm) return;
-    console.log("register", form);
   };
   return (
     <div className="min-h-screen grid md:grid-cols-2">

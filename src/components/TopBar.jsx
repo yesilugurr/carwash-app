@@ -19,7 +19,7 @@ const TopBar = () => {
     setDark(!dark);
   };
   return (
-    <header className="flex items-center justify-between p-4 bg-white/10 backdrop-blur shadow-inner transition-colors duration-250">
+    <header className="flex items-center justify-between p-4 bg-baseDark text-white dark:bg-slate-900">
       <div className="flex items-center gap-1 text-xl font-display font-bold text-primary">
         <SparklesIcon className="w-6 h-6 text-secondary" />
         CarWash
@@ -36,13 +36,13 @@ const TopBar = () => {
           <>
             <Link
               to="/login"
-              className="px-3 py-1 rounded bg-primary text-white"
+              className="h-10 px-6 rounded-lg bg-primary text-white flex items-center"
             >
               Log In
             </Link>
             <Link
               to="/register"
-              className="px-3 py-1 rounded bg-secondary text-black"
+              className="h-10 px-6 rounded-lg bg-secondary text-black flex items-center"
             >
               Sign Up
             </Link>
