@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Dialog, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import TopBar from "../components/TopBar";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 const Overview = lazy(() => import("../pages/provider/Overview"));
 const Schedule = lazy(() => import("../pages/provider/Schedule"));
@@ -22,7 +23,8 @@ const ProviderLayout = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   return (
-    <div className="min-h-screen flex flex-col">
+    <ErrorBoundary>
+      <div className="min-h-screen flex flex-col">
       <TopBar />
       <div className="relative">
         <nav className="hidden md:flex backdrop-blur bg-white/10 shadow-inner p-2 space-x-4">
@@ -98,7 +100,8 @@ const ProviderLayout = () => {
           </AnimatePresence>
         </Suspense>
       </div>
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 };
 

@@ -9,6 +9,7 @@ const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
 const CustomerLayout = lazy(() => import("./layouts/CustomerLayout"));
 const ProviderLayout = lazy(() => import("./layouts/ProviderLayout"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 function App() {
   const location = useLocation();
@@ -21,6 +22,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/customer/*" element={<CustomerLayout />} />
           <Route path="/provider/*" element={<ProviderLayout />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
     </Suspense>
