@@ -1,3 +1,4 @@
+// ✨ customer-refactor
 import { create } from 'zustand';
 import {
   services as sampleServices,
@@ -9,6 +10,8 @@ const useDummy = create((set, get) => ({
   services: sampleServices,
   products: sampleProducts,
   appointments: sampleAppointments,
+  // selected filter category
+  selectedCategory: 'Exterior Wash',
   packages: {
     Exterior: true,
     Interior: false,
@@ -16,6 +19,8 @@ const useDummy = create((set, get) => ({
     'Paint Protection': false
   },
   providerSlots: [],
+
+  setSelectedCategory: (cat) => set({ selectedCategory: cat }),
 
   addService: (service) => set(state => ({ services: [...state.services, service] })),
   updateService: (id, data) => set(state => ({
