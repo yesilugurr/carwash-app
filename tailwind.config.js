@@ -19,6 +19,12 @@ module.exports = {
       dropShadow: {
         glow: "0 0 15px #00B4D866",
       },
+      borderRadius: {
+        DEFAULT: "12px",
+      },
+      boxShadow: {
+        DEFAULT: "0 4px 6px rgba(0,0,0,0.1)",
+      },
     },
   },
   plugins: [],

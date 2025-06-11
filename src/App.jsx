@@ -5,6 +5,8 @@ import { AnimatePresence } from "framer-motion";
 import "./App.css";
 
 const LandingPage = lazy(() => import("./pages/LandingPage"));
+const Login = lazy(() => import("./pages/auth/Login"));
+const Register = lazy(() => import("./pages/auth/Register"));
 const CustomerLayout = lazy(() => import("./layouts/CustomerLayout"));
 const ProviderLayout = lazy(() => import("./layouts/ProviderLayout"));
 
@@ -15,6 +17,8 @@ function App() {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/customer/*" element={<CustomerLayout />} />
           <Route path="/provider/*" element={<ProviderLayout />} />
         </Routes>
