@@ -33,6 +33,13 @@ const useDummy = create((set, get) => ({
   appointments: [
     { id: 1, serviceId: 1, customerName: 'John Doe', date: '2025-06-15', time: '09:00', package: 'Basic Wash' }
   ],
+  packages: {
+    Exterior: true,
+    Interior: false,
+    Detailing: false,
+    'Paint Protection': false
+  },
+  providerSlots: [],
 
   addService: (service) => set(state => ({ services: [...state.services, service] })),
   updateService: (id, data) => set(state => ({
@@ -59,7 +66,18 @@ const useDummy = create((set, get) => ({
   })),
   deleteAppointment: (id) => set(state => ({
     appointments: state.appointments.filter(a => a.id !== id)
-  }))
+  })),
+
+  markAppointmentDone: (id) => set(state => ({
+    appointments: state.appointments.map(a => a.id === id ? { ...a, status: 'done' } : a)
+  })),
+
+  togglePackage: (name) => set(state => ({
+    packages: { ...state.packages, [name]: !state.packages[name] }
+  })),
+
+  addSlot: (slot) => set(state => ({ providerSlots: [...state.providerSlots, slot] })),
+  deleteSlot: (id) => set(state => ({ providerSlots: state.providerSlots.filter(s => s.id !== id) }))
 }));
 
 export default useDummy;
